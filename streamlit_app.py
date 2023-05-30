@@ -22,7 +22,8 @@ def pre_process_data(df, label_encoder_dict):
     if 'customerID' in df_out.columns:
         df_out.drop('customerID', axis=1, inplace=True)
     for column, le in label_encoder_dict.items():
-        df_out.loc[:, column] = le.transform(df_out.loc[:, column])
+        if column in df_out.columns:
+            df_out.loc[:, column] = le.transform(df_out.loc[:, column])
         
     return df_out
 
